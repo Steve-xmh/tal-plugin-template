@@ -3,5 +3,12 @@
 version = 4
 
 [[package]]
+name = "tal-plugin-core"
+version = "0.1.0"
+
+[[package]]
 name = "tal-plugin-template"
 version = "0.1.0"
+dependencies = [
+ "tal-plugin-core",
+]

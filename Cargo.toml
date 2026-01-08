@@ -7,3 +7,12 @@ edition = "2024"
 crate-type = ["cdylib"]
 
 [dependencies]
+tal-plugin-core = { path = "../tal-plugin-core" }
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+opt-level = "z"
+debug = false
+strip = true

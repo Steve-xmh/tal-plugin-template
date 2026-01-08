@@ -1,18 +1,20 @@
-// Reference: https://github.com/esuo1198/TaikoArcadeLoader/blob/Refactor/PLUGINS.md
-
-type CardCallback = extern "C" fn(i32, i32, *const u8, u64);
-
-#[unsafe(no_mangle)]
-pub extern "stdcall" fn Init() {
-    
+#[derive(Default)]
+struct PluginTemplate {
+    context: Option<tal_plugin_core::TalPluginContext>,
 }
 
-#[unsafe(no_mangle)]
-pub extern "stdcall" fn Update() {
-    
+impl PluginTemplate {
+    fn ctx(&self) -> &tal_plugin_core::TalPluginContext {
+        self.context.as_ref().expect("Context not initialized")
+    }
 }
 
-#[unsafe(no_mangle)]
-pub extern "stdcall" fn WaitTouch(callback: CardCallback, data: u64) {
+impl tal_plugin_core::TalPlugin for PluginTemplate {
+    fn init(&mut self, ctx: tal_plugin_core::TalPluginContext) {
+        self.context = Some(ctx);
+    }
     
+    // Override other necessary methods here
 }
+
+tal_plugin_core::define_plugin!(PluginTemplate);
